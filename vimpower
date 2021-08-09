@@ -1,0 +1,607 @@
+shift zz to save and exit
+gg=G indentation
+zz bring current line in middle
+ctrl f full page down
+ctrl b full page back
+ctrl u half page up
+ctrl d half page down
+ctrl o start by new line insert mode
+{ / } paragraph up / down
+daw delete current word
+dap delete paragraph
+dd (operator double acts on line) delete line
+ctrl o in insert mode give one bullet for normal mode
+(ctrl + reg.)0 paste code
+(ctrl + reg.)(ctrl + preg)0 paste code
+(ctrl + r)= 164 * 3 <CR> expression register use
+ctrl + v (digit) symbol
+ctrl + v (nondigit) literal nonliteral insertion
+; repeat jump
+, reverse jump
+f{char} search for char in a line
+>> shift lines
+n>> shift n lines
+n> means n TAB shift of block in visual mode
+last edit position
+last active window
+listing all the open windows
+nmap <C-S-T> :vs<bar>:b#<CR> to open closed window in .vimrc
+C+^ toggle to previous file
+C+I for next change // important
+C+O for previous change // important
+:tab sb buffer // important this will open buffer in new tab
+f12 : bn(sbn can be used) for next changed file
+f11 : bp(sbp can be used) for previous changed file
+:grep or vimgrep -F 'pattern' **/*somefilename.c
+set wildmenu           " see :h 'wildmenu'
+set wildmode=list:full " see :h 'wildmode' for all the possible values
+:e **/foo*<Tab>        " see :h starstar
+:e TAB option is good one for navigation
+ctrl r + ctrl w for cutting and pasting word under cursor
+:E explorer window and then partial search can be done
+Ctrl + P for autocompletion
+o for toggleing the selection mode
+ctrl + g for toggeling in visual and select mode
+viw for selecting a word under cursor
+diw for deleting a word under cursor
+gv -- reselect last visual selection
+vit other variants like vi{ or vi( vi[ are also powerful.
+ctrl+v i { ( [ : ctr+v i<tag> is for inner tag selection
+U in visual mode is same as gU in normal mode. vitU is same as gUit, but former is used as we can use . operator.
+<ctrl-v>jj$ A; Esc this shows the power of vimgrep
+3G for jumping to 3rd line equivalent to :3d
+2GVG will select everything from 2 to end of file and then you can place command to do whatever you want.   
+Vjj + :'<,'>m$ -- moving visually selected lines to endoffile
+:{visualrange}normal I// to comment out everything
+<C-^> for toggling buffer
+:ls for list of buffers // very important
+:buffer partialname to search into opened file // very important
+:bro[wse] ol[dfiles][!] old buffer list
+:cope or :cw for quick list when we grep 
+:vimgrep /pattern/g **/* or filename
+set incsearch will show runtime highlighting
+:tab sp open in tab and then can be closed with <C-W>c
+:args fis/**/*.* maths **/*.* for complete reach into all files.
+:args **/*.* // very important for adding all files in buffers.
+map <F7> :mksession! ~/vim_session<cr> " Quick write session with F7
+map <F8> :source ~/vim_session<cr>     " And load session with F8
+g; older change
+g, newer change
+q: for command history // important
+q/ for serch history
+( Ctrl+W ) = halfly maximise window and try search again.
+(ctrl - p, n) autocomplete
+z= for suggestions for right spelling
+[s or ]s for previous and next wrong spelling
+":set spell" to set spell checking on
+<ctrl-x><ctrl-s> for suggestion and fixing errors.
+zg for adding word
+zw for removing word
+zug for undo zg or zw
+[[ :backward starting of function block [first collum {]
+]] : forward starting of function block
+[] : backward ending brace of function
+][ : forward ending brace of function
+{ paragraph moving back
+} paragraph moving next
+:set paste/nopaste and shift insert your code in INSERT mode.
+[{ backward brace {
+]} forward brach }
+:bd *.yml <c-a> // important to clear some buffers.
+:%bd to delete all buffers
+:bd <buf number> to delete that buffer
+:bd% to delete current buffre
+
+3s -- to substitute 3 characters -- better alternative to R
+
+:ctrl+rw word under cursor ### VIMP
+
+:nmap <leader>w :s/\(<c-r>=expand("<cword>")<cr>\)/ ### replace word under cursor
+
+set foldmethod=manual or fdm=manual or indent
+zf% by putting cursor on any brances
+zO to expand folding
+
+power of mark : ###
+m a // tostart mark on line 'x'
+: 105 // to go to line number 'y'
+shift or ctrl V // to start either visual mode
+' a // to stop mark. -- everything will be selected between line 'x' to 'y'
+
+or by patter search
+-- v / foo -- will search the next foo occurence and then select ###
+
+Ctrl+g for filename and line number
+
+shfit+F8 for quick search
+
+:windo e to reload all windows (in current tab)
+:bufdo e to reload all buffers
+
+->GoTo inside brackets
+:yi( or yi) or yi[ or yi] to yank text inside bracket
+:cy(" " " " " " " " " " " to change text inside bracket
+
+:vimgr <UP> will give all the match of history command [partially write the command and use it]
+
+visual selection :
+ctrl+v /foo till first location, also can enter 'n' for next location
+ctrl+v[51] from current line to line 51 down
+
+ctrl+w and w to switch windows //important
+"  "  and s to split horizontally 
+"  "  and v to split vertically
+:cope -- c open for quickfix :: :cw
+
+ctrl-z | terminal command | fg (forground) // important commnad
+
+ctrl - o in insert mode will allow to type one command and will bring back in insert mode
+
+open accidently closed window  :ls " and :tabnew +Nbuf (:tabnew +15buf)
+ctrl+w and ctrl+v to create new window in vertical split. ctrl+s to create horizontal shift
+
+
+Ctrl w + R to move window to right
+Ctrl w + o to maximize current window
+ctrl W + = to equal spilt
+ctrl W + | for maximizing window
+
+==================== registers ===========================
+
+Expression register =
+got to line where expression needs to be evaluated
+press -- <Ctrl-r>=
+write expression at the bottom and enter
+
+copying to windows is not allowed as xterm-clipboard is not used while compiling vim
+:version and search for xterm-clipboard and it will show wherther that option is present or not
+
+"% Name of the current file
+"# Name of the alternate file
+". Last inserted text
+": Last Ex command
+"/ Last search pattern
+
+===============cscope====================
+First, you need to update cscope database.
+:!cscope -Rbq
+Then, reinit the database from vim.
+:cs reset
+
+
+
+ctrl-y Search with the last text typed.
+ctrl-r Rebuild the cross-reference.
+ctrl-c Toggle ignore/use letter case when searching. (When ignoring letter case, search for ``FILE'' will match ``File'' and ``file''.)
+ctrl-l Redraw the screen.
+? Give help information about cscope commands.
+ctrl-d Exit cscope.
++ Display next set of lines.
+- Display previous set of lines.
+ctrl-b show previous search entry - history
+ctrl-f show forward search entry - history
+
+
+------------------------ tab setting ---------------------------
+
+Paste your file into an empty buffer, then:
+
+:set ts=2 sts=2 noet
+:retab!
+
+This changes every 2 spaces to a TAB character, then:
+
+:set ts=4 sts=4 et
+:retab
+This changes every TAB to 4 spaces.
+
+
+It may be possible with :set shiftwidth=4 and gg=G
+
+most elegant way : :%s/^\s*/&&
+------------------------- move swiftly -------------------------
+
+display
+gj down display line
+gk up 
+g$ at the end of display line
+g0 at the start of display line
+g^ at the start of non-zero char of display line
+
+WORD vs word
+
+here we go pal... -- 7 word 4 WORD
+use : cW cw
+
+f{char}  -- exact char
+t{char}  -- Till/before char
+dt. I've been expecting you.
+ct. [Like this use]
+f{char};;;; -- for repetition.
+
+
+
+/searchword
+n next
+N previous
+mantra is -- act repeat reverse
+
+v/strsearch<C-R> c or d
+visual select -- move with search -- delete
+this is an awesome combo
+
+even quicker way is d/searchstr<c-r>
+even if cursor is at the start of searchstr, it won't get deleted as search '/' is an exclusive pattern :: Important amazing
+=========================================== vimscope without comment ========================================
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" CSCOPE settings for vim           
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
+" This file contains some boilerplate settings for vim's cscope interface,
+" plus some keyboard mappings that I've found useful.
+"
+" USAGE: 
+" -- vim 6:     Stick this file in your ~/.vim/plugin directory (or in a
+"               'plugin' directory in some other directory that is in your
+"               'runtimepath'.
+"
+" -- vim 5:     Stick this file somewhere and 'source cscope.vim' it from
+"               your ~/.vimrc file (or cut and paste it into your .vimrc).
+"
+" NOTE: 
+" These key maps use multiple keystrokes (2 or 3 keys).  If you find that vim
+" keeps timing you out before you can complete them, try changing your timeout
+" settings, as explained below.
+"
+" Happy cscoping,
+"
+" Jason Duell       jduell@alumni.princeton.edu     2002/3/7
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" my settings
+
+"nmap <C-S-T> :vs<bar>:b#<CR>
+nmap <F2> <C-W><C-W>
+nmap <F11> :bp<CR>
+nmap <F12> :bn<CR>
+nnoremap <C-j> :tabprevious<CR>
+nnoremap <C-k> :tabnext<CR>
+nmap <F10> /<C-r><C-w>
+nnoremap <ESC><ESC> :noh<CR>
+
+set wildmenu           " see :h 'wildmenu'
+set wildmode=list:full " see :h 'wildmode' for all the possible values
+
+set nocompatible
+set expandtab
+set autoindent
+set smartindent
+set softtabstop=4
+set tabstop=4
+set shiftwidth=4
+set showmatch
+set ruler
+set nohls
+set number
+set wrap
+set linebreak
+set mouse=a
+syntax on
+set history=200
+
+:color desert
+
+autocmd BufWritePre *.conf :%s/\s\+$//e
+autocmd BufWritePre *.py :%s/\s\+$//e
+autocmd BufWritePre *.css :%s/\s\+$//e
+autocmd BufWritePre *.html :%s/\s\+$//e
+autocmd BufWritePre *.c :%s/\s\+$//e
+
+if has("cscope")
+
+    set cscopetag
+
+    set csto=0
+
+    if filereadable("cscope.out")
+      set nocscopeverbose
+        cs add cscope.out
+      set cscopeverbose  
+    elseif $CSCOPE_DB != ""
+        cs add $CSCOPE_DB
+    endif
+
+    set cscopeverbose  
+
+    cnoreabbrev <expr> ssr 
+          \ ((getcmdtype() == ':' && getcmdpos() <= 4)? 'cs find s'  : 'ssr')
+    cnoreabbrev <expr> sfr
+          \ ((getcmdtype() == ':' && getcmdpos() <= 4)? 'cs find c' : 'sfc')
+    cnoreabbrev <expr> sfd
+          \ ((getcmdtype() == ':' && getcmdpos() <= 4)? 'cs find g' : 'csr')
+    cnoreabbrev <expr> of
+          \ ((getcmdtype() == ':' && getcmdpos() <= 4)? 'cs find f' : 'of')
+    cnoreabbrev <expr> regx
+          \ ((getcmdtype() == ':' && getcmdpos() <= 4)? 'cs find t' : 'regx')
+
+    nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>	
+    nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>	
+    nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>	
+    nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>	
+    nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>	
+    nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>	
+    nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+    nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>		
+
+    nmap <C-@>s :scs find s <C-R>=expand("<cword>")<CR><CR>	
+    nmap <C-@>g :scs find g <C-R>=expand("<cword>")<CR><CR>	
+    nmap <C-@>c :scs find c <C-R>=expand("<cword>")<CR><CR>	
+    nmap <C-@>t :scs find t <C-R>=expand("<cword>")<CR><CR>	
+    nmap <C-@>e :scs find e <C-R>=expand("<cword>")<CR><CR>	
+    nmap <C-@>f :scs find f <C-R>=expand("<cfile>")<CR><CR>	
+    nmap <C-@>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>	
+    nmap <C-@>d :scs find d <C-R>=expand("<cword>")<CR><CR>	
+
+    nmap <C-@><C-@>s :vert scs find s <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-@><C-@>g :vert scs find g <C-R>=expand("<cword>")<CR><CRv
+    nmap <C-@><C-@>c :vert scs find c <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-@><C-@>t :vert scs find t <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-@><C-@>e :vert scs find e <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-@><C-@>f :vert scs find f <C-R>=expand("<cfile>")<CR><CR>	
+    nmap <C-@><C-@>i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>	
+    nmap <C-@><C-@>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
+
+endif
+
+=========================== tmux =============================
+1)yum install tmux.
+2)tmux.
+3)tmux list-session.
+4)tmux attach -t session_number.
+5)ctrl-b + $ to rename a tmux session.
+6)ctrl-b + " to start a windlow of tmux session in split mode.
+7)ctrl-b + up down side to switch between sessions.
+8)ctrl-b + x to close the session window
+9)ctrl-b + c to copy and start new window.
+10)ctrl-b + n/p move withing windoes of sessions
+11)ctrl-b + s list sessions
+12)ctrl-b + c move through sessions
+13)ctrl-b + d detach session
+14)ctrl-d + ( {back} ) {forward} session
+15)set-option -g history-limit 3000
+
+-- panes
+
+16)ctrl+b+% vertical split
+17)ctrl+b+" horizontal split
+18)ctrl+b+ left right up down
+19)ctrl+b+z for zooming current pane
+20)ctrl+b+! for making a pane to zoom
+21)ctrl+b+x for closing tab
+22)ctrl+b+spacebar for beautiful layout
+23)ctrl+b+o for rotation in panes list
+24)ctrl+b+ alt+arrow for adjusting panes
+
+
+-- windows
+
+24)ctrl+b+c to create window
+25)ctrl+b+, to rename window
+26)ctrl+b+& to close current window
+27)ctrl+b+l for last window
+28)ctrl+b+w choose window or list window
+-- session
+
+27) tmux new -s mysession -- create session with myname
+28) tmux kill-ses -t mysession -- terminate myname session
+29) tmux kill-session -a -- kill all other session
+30) ctrl+b $ -- rename session
+31) ctrl+b d -- detach session
+32) tmux ls -- to list all session or ctrl+b s -- to list session
+33) tmux a -- attach last session
+32) tmux a -t mysession -- attach my session
+33) ctrl+b ) move to next session
+34) ctrl+b ( move to prev session
+
+---
+
+*** ctrl+b ? for command help
+
+---- config
+set-option -g history-limit 3000
+
+-- copying on tmux's clipboard
+
+THIS will just manipulate tmux's clipboard.
+
+ctrl+b+[ for starting copy 
+ctrl+space for starting copy selection
+ctrl+w or altr+w for exiting copy selection and copy on clipboard
+go to the another pane or window and paste using ctrl+b+]
+
+
+------------------------------
+Final working with mousemode:
+
+https://stackoverflow.com/questions/17445100/getting-back-old-copy-paste-behaviour-in-tmux-with-mouse
+
+ctrl+b :set -g mouse on
+select the text with 'shift' pressed using mouse
+shift + Enter in windows.
+
+------------------------------
+
+if tmux configured and xclip is installed
+
+ctrl+b+[ for starting copy 
+v : for starting copy selection
+y : for exiting copy selection and copy on clipboard
+go to the another pane or window and paste using ctrl+b+]
+
+
+xclip local install :
+
+#!/bin/bash
+ 
+# Script for installing xclip on systems without root access.
+# xclip will be installed in $HOME/local/bin.
+# It's assumed that wget and a C/C++ compiler are installed.
+ 
+# exit on error
+set -e
+ 
+XCLIP_VERSION=0.12
+ 
+# create our directories
+mkdir -p $HOME/local $HOME/xclip_tmp
+cd $HOME/xclip_tmp
+ 
+# download source files for XClip
+wget http://kent.dl.sourceforge.net/project/xclip/xclip/${XCLIP_VERSION}/xclip-${XCLIP_VERSION}.tar.gz
+ 
+# extract files, configure, and compile
+ 
+tar xvzf xclip-${XCLIP_VERSION}.tar.gz
+cd xclip-${XCLIP_VERSION}
+./configure --prefix=$HOME/local --disable-shared
+make
+make install
+
+----
+export PATH="$HOME/local/bin:$PATH"
+----
+
+.tmux.conf
+
+[root@ssc-vm-4847 ~]# cat ~/.tmux.conf
+#check version and put in variable
+run-shell 'tmux setenv -g TMUX_VERSION $(tmux -V | sed -En "s/^tmux ([0-9]+(.[0-9]+)?).*/\1/p")'
+
+setw -g mode-keys vi
+if-shell -b '[ "$(echo "$TMUX_VERSION < 2.4" | bc)" = 1 ]' " \
+  bind-key -t vi-copy v begin-selection; \
+  bind-key -t vi-copy r rectangle-toggle; \
+  bind-key -t vi-copy y copy-pipe 'xclip -selection clipboard -in'"
+
+#You would have to adapt here by changing ">" to ">="
+#and maybe changing the key binding by what you
+#already have if what you have indeed worked after
+#checking the points I gave you earlier.
+if-shell -b '[ "$(echo "$TMUX_VERSION > 2.5" | bc)" = 1 ]' " \
+  bind-key -T copy-mode-vi 'v' send -X begin-selection; \
+  bind-key -T copy-mode-vi 'r' send -X rectangle-toggle; \
+  bind-key -T copy-mode-vi 'y' send -X copy-pipe-and-cancel 'xclip -selection clipboard -in'"
+[root@ssc-vm-4847 ~]#
+
+
+https://unix.stackexchange.com/questions/131011/use-system-clipboard-in-vi-copy-mode-in-tmux
+
+https://unix.stackexchange.com/questions/596891/vim-mode-copy-paste-not-working-on-tmux
+
+
+
+-----------------------------
+tmux source-file ~/.tmux.conf
+
+
+------------------------------
+Final working with mousemode:
+
+https://stackoverflow.com/questions/17445100/getting-back-old-copy-paste-behaviour-in-tmux-with-mouse
+
+ctrl+b :set -g mouse on
+select the text with 'shift' pressed using mouse
+shift + Enter in windows.
+
+
+========================================== pendrive recovery commmand ===========================
+
+attrib -h -r -s /s /d d:\*.*
+
+
+=================================== windows =====================================
+
+<c-w>w means ctrl+ww will rotate through the windows
+<c-w>c   :close close this window
+<c-w>o   :only keep this open
+
+<c-w>= make all windows equal
+<c-w>_ maximise height
+<c-w>| maximise width
+
+=================================== Tabs -=========================================
+
+:tabe to create tab //inside it create windows and use
+:tabc to close tab
+:tabo[nly] to keep only current tab open
+:<c-w>T to make a window a tab
+
+gt    :tabn     goto next
+gT    :tabp     goto previous
+{N}gt :tabn {N} goto next N
+ 
+:tabm[ove] {N} this will move tab to Nth position
+:tabm 0 means move current tab to first position 
+:tabm means move current tab to at last
+
+================================== copy paste =====================================
+linux to linux
+visually select + [y] and paste using shift insert
+linux to windows
+visually select + [y] and paste using ctrl+v
+====================================================================================
+
+
+================================ git pr check ===================================
+
+git ls-remote --refs origin
+git fetch origin pull/123/head:pr/123 && git checkout pr/123
+[co-pr = !sh -c 'git fetch origin pull/$1/head:pr/$1 && git checkout pr/$1' -] -- alias
+git co-pr 123
+
+=============================== bashrc settings =================================
+export PS1="[\$(whoami) \W] \$"; clear;
+export PROMPT_COMMAND="echo -n \[\$(date +%H:%M:%S)\]\ "
+
+
+============================ termial commandline power ==========================
+Ctrl+L for clearning screen
+Ctrl+S for pausing scrollin of logs
+Ctrl+Q for resume the scrolling of the logs
+
+terminal line
+Ctrl+A to go to start of the command
+Ctrl+E to go to the end of the command
+Alt+B word back
+Alt+F word forward
+
+Ctrl+K delte word to the end from the cursor
+Ctrl+X and backspace delete the command from cursor to start // or Ctrl+U to delete commamdn
+Ctrl+D delete the word under the cursor
+
+Ctrl+T transport character
+ESC and capital T transport word
+ESC and C chagne case
+ESC and U change case to upper all the way to end
+ESC and L change case to lower all the way to end
+
+CTRL+Z for backgrounding process
+CTRL+C to kill the process if process honor
+CTRL+D to exit the bash shell
+
+
+================================= fzf ==============================================
+ripgrep install
+https://github.com/BurntSushi/ripgrep
+$ sudo yum-config-manager --add-repo=https://copr.fedorainfracloud.org/coprs/carlwgeorge/ripgrep/repo/epel-7/carlwgeorge-ripgrep-epel-7.repo
+$ sudo yum install ripgrep
+
+best way to apply changes :
+:Rg something -g '*.py'
+Alt+a :: will select all grepped files (same as shift+tab) --> Enter // this will create quickfix
+Now do, bufdo, cfdo or windo on the quick fix ::
+:bufdo %s/searchthis/replacethis/gc | update
+
+
+set -g mouse off
