@@ -146,6 +146,22 @@ Ctrl w + o to maximize current window
 ctrl W + = to equal spilt
 ctrl W + | for maximizing window
 
+===================== vim navigation ======================
+
+{ - start of current para
+} - end of the current para // best options for navigation in pages
+
+* - search and move in next direction the word under cursor
+# - search and move in back direction the word under cursor // best for finding word in a file
+
+E -- to go end of word // e for next end of the word -- considering special characters as new one
+W -- to go next word // w for next word in a string
+B -- to go prev or back word start // b for prev word in a string // Best for moving in the line
+
+NG for going to particular line number N
+N% for going past the N percentage in the file
+
+Page up and page down // best for moving in the file.
 ==================== registers ===========================
 
 Expression register =
