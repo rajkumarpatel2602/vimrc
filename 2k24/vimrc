@@ -1,0 +1,222 @@
+nmap <F7> :mksession! ~/vim_session<CR>
+nmap <F8> :source ~/vim_session<CR>
+nmap <F5> :tab sp<CR> 
+nmap <F12> :bn<CR>
+nmap <F11> :bp<CR>
+nnoremap <C-j> :tabprevious<CR>
+nnoremap <C-k> :tabnext<CR>
+nnoremap j gj
+nnoremap k gk
+" 
+nnoremap <C-s> :update<CR>
+inoremap <C-s> <ESC>:update<CR>gi
+" Serch word under cursor
+nmap <F10> /<C-r><C-w>
+nmap <F6> :!cscope -Rb<CR>
+" cscope -Rbq && :cs reset for building database on go.
+nnoremap <ESC><ESC> :noh<CR>
+" set highlighting without moving cursor to next
+nnoremap <F9> :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
+" c+i c+o for next and previous change. or edit location
+" c+^ to toggle to previous and current file
+" c+n for auto completion
+" d/c <verb> followed by search or navigation sequence will work wonderfully
+
+imap jj <ESC>
+
+" change/delete word under cursoer, and us '.' to repeat operation
+nnoremap c* /\<<C-R>=expand('<cword>')<CR>\>\C<CR>``cgn
+nnoremap c# ?\<<C-R>=expand('<cword>')<CR>\>\C<CR>``cgN
+nnoremap d* /\<<C-r>=expand('<cword>')<CR>\>\C<CR>``dgn
+nnoremap d# ?\<<C-r>=expand('<cword>')<CR>\>\C<CR>``dgN
+
+nmap <silent> <C-N> :cn<CR>zv
+nmap <silent> <C-P> :cp<CR>zv
+
+nnoremap <Leader>o :bp<CR>
+nnoremap <Leader>p :bn<CR>
+nnoremap <Leader>r :%s///g<left><left>
+nnoremap <Leader>rc :%s///gc<left><left>
+nnoremap <Leader>s :grep -RF --include=*.{h,c,cpp,mk,make,py,dml} "" .<left><left><left>
+
+set wildmenu           " see :h 'wildmenu'
+set wildmode=list:full " see :h 'wildmode' for all the possible values
+
+call plug#begin('~/.vim/plugged')
+" Make sure you use single quotes
+
+" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
+Plug 'junegunn/vim-easy-align'
+
+" Any valid git URL is allowed
+Plug 'https://github.com/junegunn/vim-github-dashboard.git'
+
+" Multiple Plug commands can be written in a single line using | separators
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+
+" On-demand loading
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+
+" Using a non-default branch
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+
+" Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
+"Plug 'fatih/vim-go', { 'tag': '*' } "XXX to remove error
+
+" Plugin options
+Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
+
+" Plugin outside ~/.vim/plugged with post-update hook
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+
+" Unmanaged plugin (manually installed and updated)
+Plug '~/my-prototype-plugin'
+
+" Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+Plug 'morhetz/gruvbox'
+
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+
+call plug#end()
+
+nnoremap <silent> <C-f> :Files<CR>
+nnoremap <silent> <C-e> :Find<CR>
+
+"com! -bar -bang Ag call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'options': '--delimiter=: --nth=4..'}, 'right'), <bang>0)
+
+"https://dev.to/iggredible/how-to-search-faster-in-vim-with-fzf-vim-36ko
+" PLUGIN: FZF
+"let mapleader = "\"
+"nnoremap <silent> <Leader>b :Buffers<CR>
+"nnoremap <silent> <Leader>f :Rg<CR>
+"nnoremap <silent> <Leader>/ :BLines<CR>
+"nnoremap <silent> <Leader>' :Marks<CR>
+"nnoremap <silent> <Leader>g :Commits<CR>
+"nnoremap <silent> <Leader>H :Helptags<CR>
+"nnoremap <silent> <Leader>hh :History<CR>
+"nnoremap <silent> <Leader>h: :History:<CR>
+"nnoremap <silent> <Leader>h/ :History/<CR> 
+" Only content match is required not the full 
+command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 10..'}, <bang>0)
+"command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --ignore-case --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
+"command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case " . <q-args>, 1, <bang>0)
+"command! -bang -nargs=* Rg
+"  \ call fzf#vim#grep(
+"  \   'rg --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
+"  \   fzf#vim#with_preview(), <bang>0)
+"set grepprg=rg\ --vimgrep\ --smart-case\ --follow
+command! Rg2 call fzf#vim#grep(
+  \ "rg --column --line-number --no-heading --color=always --smart-case "
+  \ . (len(<q-args>) > 0 ? <q-args> : '""'),
+  \ 1,
+  \ fzf#vim#with_preview(),
+  \ <bang>0)
+
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+"command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+
+" Good plugin for surrounding and removing braces
+"mkdir -p ~/.vim/pack/tpope/start
+"cd ~/.vim/pack/tpope/start
+"git clone https://tpope.io/vim/surround.git
+"vim -u NONE -c "helptags surround/doc" -c q
+
+" This will remove all warnings
+let g:go_version_warning = 0
+let g:rg_derive_root='true'
+
+set softtabstop=4 tabstop=8 shiftwidth=4 
+set incsearch
+set hlsearch
+set nocompatible
+set noexpandtab
+set autoindent
+set smartindent
+"set softtabstop=4
+"set tabstop=4
+"set shiftwidth=4
+set showmatch
+set ruler
+set nohls
+set number
+set wrap
+set linebreak
+set mouse=a
+syntax on
+set history=1000
+set incsearch
+set laststatus=2
+set nohlsearch
+set hlsearch
+:set colorcolumn=80
+set termguicolors
+colorscheme gruvbox
+"colorscheme desert 
+set background=dark
+"autocmd VimEnter * NERDTree | wincmd p
+set term=xterm-256color
+
+autocmd BufWritePre *.conf :%s/\s\+$//e
+autocmd BufWritePre *.py :%s/\s\+$//e
+autocmd BufWritePre *.css :%s/\s\+$//e
+autocmd BufWritePre *.html :%s/\s\+$//e
+autocmd BufWritePre *.c :%s/\s\+$//e
+
+if has("cscope")
+
+    set cscopetag
+
+    set csto=0
+
+    if filereadable("cscope.out")
+      set nocscopeverbose
+        cs add cscope.out
+      set cscopeverbose  
+    elseif $CSCOPE_DB != ""
+        cs add $CSCOPE_DB
+    endif
+
+    set cscopeverbose  
+
+    cnoreabbrev <expr> ssr 
+          \ ((getcmdtype() == ':' && getcmdpos() <= 4)? 'cs find s'  : 'ssr')
+    cnoreabbrev <expr> sfr
+          \ ((getcmdtype() == ':' && getcmdpos() <= 4)? 'cs find c' : 'sfc')
+    cnoreabbrev <expr> sfd
+          \ ((getcmdtype() == ':' && getcmdpos() <= 4)? 'cs find g' : 'csr')
+    cnoreabbrev <expr> of
+          \ ((getcmdtype() == ':' && getcmdpos() <= 4)? 'cs find f' : 'of')
+    cnoreabbrev <expr> regx
+          \ ((getcmdtype() == ':' && getcmdpos() <= 4)? 'cs find t' : 'regx')
+
+    nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>	
+    nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>	
+    nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>	
+    nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>	
+    nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>	
+    nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>	
+    nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+    nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>		
+
+    nmap <C-@>s :scs find s <C-R>=expand("<cword>")<CR><CR>	
+    nmap <C-@>g :scs find g <C-R>=expand("<cword>")<CR><CR>	
+    nmap <C-@>c :scs find c <C-R>=expand("<cword>")<CR><CR>	
+    nmap <C-@>t :scs find t <C-R>=expand("<cword>")<CR><CR>	
+    nmap <C-@>e :scs find e <C-R>=expand("<cword>")<CR><CR>	
+    nmap <C-@>f :scs find f <C-R>=expand("<cfile>")<CR><CR>	
+    nmap <C-@>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>	
+    nmap <C-@>d :scs find d <C-R>=expand("<cword>")<CR><CR>	
+
+    nmap <C-@><C-@>s  :vert scs find s <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-@><C-@>g :vert scs find g <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-@><C-@>c :vert scs find c <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-@><C-@>t :vert scs find t <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-@><C-@>e :vert scs find e <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-@><C-@>f :vert scs find f <C-R>=expand("<cfile>")<CR><CR>	
+    nmap <C-@><C-@>i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>	
+    nmap <C-@><C-@>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
+
+endif
