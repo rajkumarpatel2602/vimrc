@@ -8,6 +8,7 @@ nnoremap <C-k> :tabnext<CR>
 nmap <F10> /<C-r><C-w>
 nmap <F6> :!cscope -d<CR>
 nnoremap <ESC><ESC> :noh<CR>
+:map <leader>b :ls<CR>:b
 
 nnoremap <Leader>r :%s///g<left><left>
 nnoremap <Leader>rc :%s///g<left><left><left>
