@@ -1,0 +1,97 @@
+{
+    "files.associations": {
+        "lib_telemetry_defs.h": "c",
+        "stdio.h": "c",
+        "fs_types.h": "c",
+        "i2c_module.h": "c",
+        "ft_api.h": "c",
+        "imc_common_resources.h": "c",
+        "pvt_lib_common.h": "c",
+        "hotplug_common.h": "c",
+        "imc_common_mng_events.h": "c",
+        "array": "c",
+        "string": "c",
+        "string_view": "c",
+        "sched_event.h": "c",
+        "mng_log.h": "c",
+        "imc_common_reset_events.h": "c",
+        "reset_manager_internal.h": "c"
+    },
+    "files.exclude": {
+        "**/history": true
+    },
+    "editor.fontSize": 17,
+    "workbench.colorTheme": "Default Positron Dark",
+    "editor.fontVariations": false,
+    "workbench.colorCustomizations": {
+        "editor.background": "#323232"
+    },
+    "editor.bracketPairColorization.enabled": false,
+    "editor.tokenColorCustomizations": {
+        "comments": "#bc9458",
+        "strings": "#a5c261",
+        "numbers": "#6892b2",
+        "keywords": "#cc7833",
+        "functions": "#ffffff",
+        "variables": "#ffffff",
+        "textMateRules": [{
+            "scope": "punctuation",
+            "settings": {
+                "foreground": "#6892b2"
+            }
+        }]
+    }
+}
+
+
+
+////// actual
+
+{
+    "editor.fontSize": 17,
+    "workbench.colorTheme": "Default Positron Dark",
+    "editor.fontVariations": false,
+    "workbench.colorCustomizations": {
+            "editor.background": "#323232"
+    },
+    "editor.bracketPairColorization.enabled": false,
+    "editor.tokenColorCustomizations": {
+        "comments": "#bc9458",
+        "strings": "#a5c261",
+        "numbers": "#6892b2",
+        "keywords": "#cc7833",
+        "functions": "#ffffff",
+        "variables": "#ffffff",
+        "textMateRules": [{
+            "scope": "punctuation",
+            "settings": {
+                "foreground": "#6892b2"
+            }
+        }]
+    }
+}
+
+// default settings.json value
+{
+    "files.associations": {
+        "lib_telemetry_defs.h": "c",
+        "stdio.h": "c",
+        "fs_types.h": "c",
+        "i2c_module.h": "c",
+        "ft_api.h": "c",
+        "imc_common_resources.h": "c",
+        "pvt_lib_common.h": "c",
+        "hotplug_common.h": "c",
+        "imc_common_mng_events.h": "c",
+        "array": "c",
+        "string": "c",
+        "string_view": "c",
+        "sched_event.h": "c",
+        "mng_log.h": "c",
+        "imc_common_reset_events.h": "c",
+        "reset_manager_internal.h": "c"
+    },
+    "files.exclude": {
+        "**/history": true
+    }
+}
